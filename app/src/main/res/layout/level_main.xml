@@ -1,0 +1,93 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="X Value: "
+        android:id="@+id/xvalue"
+        android:layout_marginLeft="87dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="152dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Y Value:"
+        android:id="@+id/yvalue"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/xvalue"
+        android:layout_alignLeft="@+id/xvalue"
+        android:layout_alignStart="@+id/xvalue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Z Value"
+        android:id="@+id/zvalue"
+        android:layout_below="@+id/yvalue"
+        android:layout_alignLeft="@+id/yvalue"
+        android:layout_alignStart="@+id/yvalue"
+        android:layout_marginTop="39dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Not Supported"
+        android:id="@+id/x"
+        android:layout_alignTop="@+id/xvalue"
+        android:layout_toRightOf="@+id/xvalue"
+        android:layout_toEndOf="@+id/xvalue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Not Supported"
+        android:id="@+id/y"
+        android:layout_alignTop="@+id/yvalue"
+        android:layout_toRightOf="@+id/xvalue"
+        android:layout_toEndOf="@+id/xvalue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Not Supported"
+        android:id="@+id/z"
+        android:layout_alignTop="@+id/zvalue"
+        android:layout_alignLeft="@+id/y"
+        android:layout_alignStart="@+id/y" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Orientation:"
+        android:id="@+id/textView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/zvalue"
+        android:layout_alignStart="@+id/zvalue"
+        android:layout_marginBottom="42dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="null"
+        android:id="@+id/orientation"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp" />
+</RelativeLayout>
