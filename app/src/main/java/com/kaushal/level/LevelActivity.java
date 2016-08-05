@@ -55,13 +55,18 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
     }
     
     public void onAccelerationChanged(float x, float y, float z) {
-        TextView xValue = (TextView) findViewById(R.id.x);
-        TextView yValue = (TextView) findViewById(R.id.y);
+        TextView value = (TextView) findViewById(R.id.value);
         TextView zValue = (TextView) findViewById(R.id.z);
-        assert xValue != null;
-        xValue.setText(String.valueOf(df.format(x)));
-        assert yValue != null;
-        yValue.setText(String.valueOf(df.format(y)));
+        assert value != null;
+        if (Math.abs(x) > 9){
+            value.setText(String.valueOf(df.format(y)));
+        }
+        else if (Math.abs(y) > 9){
+            value.setText(String.valueOf(df.format(x)));
+        }
+        else{
+            value.setText(String.valueOf(df.format(x)) + ", " + String.valueOf(df.format(y)));
+        }
         assert zValue != null;
         zValue.setText(String.valueOf(df.format(z)));
     }
