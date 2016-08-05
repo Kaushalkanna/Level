@@ -17,8 +17,7 @@ public class LevelManager {
     private static int interval = 1000;
 
     private static SensorManager sensorManager;
-    // you could use an OrientationListener array instead
-    // if you plans to use more than one listener
+
     private static LevelListener listener;
 
     private static Boolean supported;
@@ -35,6 +34,7 @@ public class LevelManager {
                 sensorManager.unregisterListener(sensorEventListener);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -58,12 +58,9 @@ public class LevelManager {
         LevelManager.interval = interval;
     }
 
-    public static void startListening(
-            LevelListener accelerometerListener) {
-        sensorManager = (SensorManager) LevelActivity.getContext().
-                getSystemService(Context.SENSOR_SERVICE);
-        List<Sensor> sensors = sensorManager.getSensorList(
-                Sensor.TYPE_ACCELEROMETER);
+    public static void startListening(LevelListener accelerometerListener) {
+        sensorManager = (SensorManager) LevelActivity.getContext().getSystemService(Context.SENSOR_SERVICE);
+        List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
         if (sensors.size() > 0) {
             Sensor sensor = sensors.get(0);
             running = sensorManager.registerListener(
@@ -73,9 +70,7 @@ public class LevelManager {
         }
     }
 
-    public static void startListening(
-            LevelListener accelerometerListener,
-            int threshold, int interval) {
+    public static void startListening(LevelListener accelerometerListener, int threshold, int interval) {
         configure(threshold, interval);
         startListening(accelerometerListener);
     }
