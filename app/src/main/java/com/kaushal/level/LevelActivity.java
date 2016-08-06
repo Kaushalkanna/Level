@@ -58,21 +58,17 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
         TextView value = (TextView) findViewById(R.id.value);
         TextView zValue = (TextView) findViewById(R.id.z);
         assert value != null;
-        levelValue(Math.round(x), Math.round(y), value);
-        assert zValue != null;
-        zValue.setText(String.valueOf(Math.round(z)));
-    }
-
-    private void levelValue(int x, int y, TextView value) {
         if (Math.abs(x) >= 9){
-            value.setText(String.valueOf(y));
+            value.setText(String.valueOf(df.format(y)));
         }
         else if (Math.abs(y) >= 9){
-            value.setText(String.valueOf(x));
+            value.setText(String.valueOf(df.format(x)));
         }
         else{
-            value.setText(String.valueOf(x) + ", " + String.valueOf(y));
+            value.setText(String.valueOf(df.format(x)) + ", " + String.valueOf(df.format(y)));
         }
+        assert zValue != null;
+        zValue.setText(String.valueOf(df.format(z)));
     }
 
     public String getRotation(Context context){
