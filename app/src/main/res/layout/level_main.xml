@@ -73,11 +73,22 @@
         android:layout_marginStart="26dp" />
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/imageView"
-        android:src="@drawable/dot"
-        android:layout_below="@+id/z"
+        android:src="@drawable/bubble"
+        android:layout_above="@+id/value"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp" />
+        android:layout_marginBottom="60dp" />
+
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageView1"
+        android:src="@drawable/redbox"
+        android:layout_above="@+id/value"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
+
+
 </RelativeLayout>

@@ -35,6 +35,8 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        lastXValue = 0f;
+        lastYValue = 0f;
         super.onConfigurationChanged(newConfig);
         currentOrientation = getRotation(context);
         orientation.setText(currentOrientation);
@@ -63,7 +65,7 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
     }
     
     public void onAccelerationChanged(float x, float y, float z) {
-        float animMultiplier = 60f;
+        float animMultiplier = 80f;
         float animX = x * animMultiplier;
         float animY = y * animMultiplier;
         float animZ = z * animMultiplier;
@@ -71,22 +73,22 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
         TextView zValue = (TextView) findViewById(R.id.z);
         imgAnimation = (ImageView) findViewById(R.id.imageView);
         assert value != null;
-        if (Math.abs(x) >= 9){
-            imgAnimation.startAnimation(bubbleAnimation(0f, animY));
-            value.setText(String.valueOf(df.format(y)));
-            lastXValue = 0f;
-            lastYValue= animY;
-        }
-        else if (Math.abs(y) >= 9){
+        if (currentOrientation == "portrait"){
             imgAnimation.startAnimation(bubbleAnimation(animX, 0f));
             value.setText(String.valueOf(df.format(x)));
             lastXValue = animX;
             lastYValue= 0f;
         }
+        else if (currentOrientation == "landscape" || currentOrientation == "reverse landscape"){
+            imgAnimation.startAnimation(bubbleAnimation(animY, 0f));
+            value.setText(String.valueOf(df.format(y)));
+            lastXValue = animY;
+            lastYValue= 0f;
+        }
         else{
             imgAnimation.startAnimation(bubbleAnimation(animX, animY));
             value.setText(String.valueOf(df.format(x)) + ", " + String.valueOf(df.format(y)));
-            lastXValue = animX;
+            lastXValue = 0f;
             lastYValue= animY;
         }
         assert zValue != null;
