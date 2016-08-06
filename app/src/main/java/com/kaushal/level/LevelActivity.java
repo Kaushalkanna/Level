@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Surface;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -15,21 +17,27 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
     private static Context context;
     public DecimalFormat df = new DecimalFormat("#.#");
     TextView orientation;
+    private float lastXValue;
+    private float lastYValue;
+    ImageView imgAnimation;
+    TranslateAnimation animation;
+    String currentOrientation;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level_main);
         context = this;
         orientation = (TextView) findViewById(R.id.orientation);
-        String CurrentOrientation = getRotation(context);
-        orientation.setText(CurrentOrientation);
+        currentOrientation = getRotation(context);
+        orientation.setText(currentOrientation);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        String CurrentOrientation = getRotation(context);
-        orientation.setText(CurrentOrientation);
+        currentOrientation = getRotation(context);
+        orientation.setText(currentOrientation);
     }
 
     protected void onResume() {
@@ -55,20 +63,45 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
     }
     
     public void onAccelerationChanged(float x, float y, float z) {
+        float animMultiplier = 60f;
+        float animX = x * animMultiplier;
+        float animY = y * animMultiplier;
+        float animZ = z * animMultiplier;
         TextView value = (TextView) findViewById(R.id.value);
         TextView zValue = (TextView) findViewById(R.id.z);
+        imgAnimation = (ImageView) findViewById(R.id.imageView);
         assert value != null;
         if (Math.abs(x) >= 9){
+            imgAnimation.startAnimation(bubbleAnimation(0f, animY));
             value.setText(String.valueOf(df.format(y)));
+            lastXValue = 0f;
+            lastYValue= animY;
         }
         else if (Math.abs(y) >= 9){
+            imgAnimation.startAnimation(bubbleAnimation(animX, 0f));
             value.setText(String.valueOf(df.format(x)));
+            lastXValue = animX;
+            lastYValue= 0f;
         }
         else{
+            imgAnimation.startAnimation(bubbleAnimation(animX, animY));
             value.setText(String.valueOf(df.format(x)) + ", " + String.valueOf(df.format(y)));
+            lastXValue = animX;
+            lastYValue= animY;
         }
         assert zValue != null;
         zValue.setText(String.valueOf(df.format(z)));
+
+
+
+    }
+
+    private TranslateAnimation bubbleAnimation(float x, float y) {
+        animation = new TranslateAnimation(lastXValue, x, lastYValue, y);
+        animation.setDuration(5000);
+        animation.setFillAfter(true);
+        return animation;
+
     }
 
     public String getRotation(Context context){
