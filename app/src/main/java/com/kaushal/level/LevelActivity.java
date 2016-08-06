@@ -16,7 +16,6 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
 
     private static Context context;
     public DecimalFormat df = new DecimalFormat("#.#");
-    TextView orientation;
     private float lastXValue;
     private float lastYValue;
     ImageView imgAnimation;
@@ -28,9 +27,7 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level_main);
         context = this;
-        orientation = (TextView) findViewById(R.id.orientation);
         currentOrientation = getRotation(context);
-        orientation.setText(currentOrientation);
     }
 
     @Override
@@ -39,7 +36,6 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
         lastYValue = 0f;
         super.onConfigurationChanged(newConfig);
         currentOrientation = getRotation(context);
-        orientation.setText(currentOrientation);
     }
 
     protected void onResume() {
@@ -68,9 +64,7 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
         float animMultiplier = 80f;
         float animX = x * animMultiplier;
         float animY = y * animMultiplier;
-        float animZ = z * animMultiplier;
         TextView value = (TextView) findViewById(R.id.value);
-        TextView zValue = (TextView) findViewById(R.id.z);
         imgAnimation = (ImageView) findViewById(R.id.imageView);
         assert value != null;
         if (currentOrientation == "portrait"){
@@ -86,16 +80,8 @@ public class LevelActivity extends AppCompatActivity implements LevelListener {
             lastYValue= 0f;
         }
         else{
-            imgAnimation.startAnimation(bubbleAnimation(animX, animY));
-            value.setText(String.valueOf(df.format(x)) + ", " + String.valueOf(df.format(y)));
-            lastXValue = 0f;
-            lastYValue= animY;
+            value.setText("Orientation Error!! Please Restart application.");
         }
-        assert zValue != null;
-        zValue.setText(String.valueOf(df.format(z)));
-
-
-
     }
 
     private TranslateAnimation bubbleAnimation(float x, float y) {
